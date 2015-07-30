@@ -18,7 +18,7 @@ Features:
 [tdd]: https://iamstarkov.com/start-with-testing/
 [badges]: https://img.shields.io/badge/with-badges-brightgreen.svg?style=flat-square
 
-![soylent example](http://i.imgur.com/10C4sIn.png)
+![transparent-banking example](https://i.imgur.com/CUXqF1W.png)
 
 ## Install
 
@@ -36,7 +36,6 @@ Features:
     # make initial commit
     git init
     git commit -am 'init commit'
-
 
 ### Next steps:
 
