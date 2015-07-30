@@ -1,0 +1,52 @@
+{
+  "name": "generator-norndet-es-module",
+  "version": "0.0.1",
+  "description": "Scaffold out an ES6 node module",
+  "scripts": {
+    "coverage": "istanbul cover _mocha app/index.js",
+    "precoveralls": "npm run coverage",
+    "coveralls": "coveralls < coverage/lcov.info",
+    "pretest": "rimraf temp",
+    "test": "mocha",
+    "tdd": "npm test -- --watch",
+    "postpublish": "git push --follow-tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nordnet/generator-nordnet-es-module.git"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "plugin",
+    "boilerplate",
+    "template",
+    "scaffold",
+    "node",
+    "module",
+    "node_module",
+    "node-module",
+    "tiny",
+    "es6"
+  ],
+  "author": "Vladimir Starkov <iamstarkov@gmail.com> (https://iamstarkov.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nordnet/generator-nordnet-es-module/issues"
+  },
+  "homepage": "https://github.com/nordnet/generator-nordnet-es-module#readme",
+  "devDependencies": {
+    "babel": "*",
+    "coveralls": "*",
+    "istanbul": "*",
+    "mocha": "*",
+    "rimraf": "^2.4.2",
+    "yeoman-assert": "^2.0.0"
+  },
+  "dependencies": {
+    "humanize-url": "^1.0.1",
+    "mkdirp": "^0.5.1",
+    "normalize-url": "^1.3.0",
+    "underscore.string": "^3.1.1",
+    "yeoman-generator": "^0.20.1"
+  }
+}
