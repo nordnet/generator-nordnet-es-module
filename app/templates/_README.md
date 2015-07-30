@@ -16,7 +16,7 @@
 ```js
 import <%= camelModuleName %> from '<%= moduleName %>';
 
-<%= camelModuleName %>('unicorns'); // unicorns
+<%= camelModuleName %>('transparent banking'); // transparent banking
 ```
 
 ## API
