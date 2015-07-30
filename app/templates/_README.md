@@ -33,3 +33,7 @@ Type: `Boolean`
 Default: `false`
 
 Lorem ipsum.
+
+## License
+
+MIT © [Nordnet Bank AB](https://www.nordnet.se/)
