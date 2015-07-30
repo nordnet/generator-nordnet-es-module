@@ -37,9 +37,7 @@ describe('generator', function () {
     helpers.mockPrompt(this.generator, {
       moduleName: 'module',
       pipe: 'dl',
-      moduleDesc: 'Your awsm module!',
-      publishConfig: 'https://abc.com',
-      repositoryUrl: 'https://github.com/username/repo.git',
+      moduleDesc: 'Your awsm module!'
     });
 
     this.generator.run(function () {
