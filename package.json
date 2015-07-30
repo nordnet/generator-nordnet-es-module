@@ -1,6 +1,6 @@
 {
   "name": "generator-norndet-es-module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Scaffold out an ES6 node module",
   "scripts": {
     "coverage": "istanbul cover _mocha app/index.js",
