@@ -1,5 +1,5 @@
 {
-  "name": "generator-norndet-es-module",
+  "name": "generator-nordnet-es-module",
   "version": "0.1.0",
   "description": "Scaffold out an ES6 node module",
   "scripts": {
@@ -25,8 +25,8 @@
     "module",
     "node_module",
     "node-module",
-    "tiny",
-    "es6"
+    "es6",
+    "Nordnet"
   ],
   "author": "Vladimir Starkov <iamstarkov@gmail.com> (https://iamstarkov.com/)",
   "license": "MIT",
