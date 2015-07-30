@@ -27,6 +27,7 @@ describe('generator', function () {
       '.editorconfig',
       '.gitignore',
       '.npmignore',
+      '.travis.yml',
       'package.json',
       'README.md',
       'src/index.js',
