@@ -1,0 +1,6 @@
+reporting:
+    print: summary
+    reports:
+        - lcov
+        - cobertura
+    dir: ./reports/coverage/istanbul
