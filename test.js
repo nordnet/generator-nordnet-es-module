@@ -36,7 +36,6 @@ describe('generator', function () {
 
     helpers.mockPrompt(this.generator, {
       moduleName: 'module',
-      pipe: 'dl',
       moduleDesc: 'Your awsm module!'
     });
 
