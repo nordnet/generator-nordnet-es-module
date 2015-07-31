@@ -13,14 +13,12 @@ Features:
 * Trustworthy README with Install, Usage, Api and License sections
 * [Easy testability, `tdd` mode][tdd] and test coverage
 * [Ready to use with travis and coveralls](#next-steps)
-* Support for package.json’s fields, your github username too
-* Memorizing fields: your name, email, website and github username and license
 * And obviously ![Badges][badges] for npm, tests, coverage and dependencies
 
 [tdd]: https://iamstarkov.com/start-with-testing/
 [badges]: https://img.shields.io/badge/with-badges-brightgreen.svg?style=flat-square
 
-![soylent example](http://i.imgur.com/10C4sIn.png)
+![transparent-banking example](https://i.imgur.com/CUXqF1W.png)
 
 ## Install
 
@@ -29,8 +27,8 @@ Features:
 ## Usage
 
     # create folder for your project
-    mkdir awsm-project
-    cd awsm-project
+    mkdir transparent-banking
+    cd transparent-banking
 
     # run generator
     yo nordnet-es-module
@@ -38,7 +36,6 @@ Features:
     # make initial commit
     git init
     git commit -am 'init commit'
-
 
 ### Next steps:
 
