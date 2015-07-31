@@ -28,10 +28,12 @@ describe('generator', function () {
       '.gitignore',
       '.npmignore',
       '.travis.yml',
+      '.istanbul.yml',
       'package.json',
       'README.md',
       'src/index.js',
       'test/index.test.js',
+      'test/mocha.opts',
     ];
 
     helpers.mockPrompt(this.generator, {

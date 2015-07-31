@@ -55,9 +55,11 @@ module.exports = yeoman.generators.Base.extend({
 
       cpTpl('_index.js', 'src/index.js');
       cpTpl('_index.test.js', 'test/index.test.js');
+      cpTpl('mocha.opts', 'test/mocha.opts');
       cpTpl('_package.json', 'package.json');
       cpTpl('_README.md', 'README.md');
       cpTpl('travis.yml', '.travis.yml');
+      cpTpl('istanbul.yml', '.istanbul.yml');
       cpTpl('editorconfig', '.editorconfig');
       cpTpl('gitignore', '.gitignore');
       cpTpl('npmignore', '.npmignore');
