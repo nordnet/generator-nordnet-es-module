@@ -7,25 +7,29 @@
     "registry": "<%= publishConfig %>"
   },<% } %>
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "trash dist",
     "build": "babel src --out-dir dist",
-    "eslint": "eslint --ext=.js -c .eslintrc src",
+    "eslint": "eslint src",
+    "eslint:jenkins": "eslint src -f checkstyle -o reports/lintresult.xml",
     "jscs": "jscs -c .jscsrc src",
-    "lint": "npm run jscs && npm run eslint",
-    "prelint:jenkins": "rimraf reports/lintresult.xml && mkdirp reports",
-    "lint:jenkins": "npm run jscs && eslint -c .eslintrc src -f checkstyle -o reports/lintresult.xml",
-    "pretest": "rimraf reports && mkdirp reports",
+    "lint": "npm-run-all jscs eslint",
+    "reports:rm": "trash reports/",
+    "reports:mkdir": "mkdirp reports",
+    "prelint:jenkins": "npm-run-all reports:rm reports:mkdir",
+    "lint:jenkins": "npm-run-all jscs eslint:jenkins",
+    "pretest": "npm-run-all reports:rm reports:mkdir",
     "test": "BABEL_DISABLE_CACHE=1 mocha",
     "posttest": "npm run reports",
     "prereports": "echo '<?xml version=\"1.0\"?>' > reports/test-results.xml",
-    "reports": "npm run reports:tests && npm run reports:coverage",
+    "reports": "npm-run-all reports:tests reports:coverage",
     "reports:tests": "BABEL_DISABLE_CACHE=1 mocha --reporter xunit | grep \"<\" >> reports/test-results.xml",
     "reports:coverage": "BABEL_DISABLE_CACHE=1 istanbul cover node_modules/mocha/bin/_mocha",
     "tdd": "npm test -- --watch",
-    "validate": "npm run lint && npm test",
+    "validate": "npm-run-all lint test",
     "prepush": "npm run validate",
     "prepublish": "npm run build",
-    "postpublish": "rimraf dist && git push --follow-tags"
+    "push": "git push --follow-tags",
+    "postpublish": "npm-run-all clean push"
   },
   "repository": {
     "type": "git",
@@ -52,8 +56,9 @@
     "jscs-jsdoc": "^1.1.0",
     "mkdirp": "^0.5.1",
     "mocha": "^2.2.5",
-    "rimraf": "^2.3.4",
+    "npm-run-all": "^1.2.6",
     "sinon": "^1.15.4",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "trash": "^1.4.1"
   }
 }
