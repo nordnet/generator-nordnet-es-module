@@ -110,7 +110,7 @@ module.exports = yeoman.generators.Base.extend({
         companyName: props.companyName,
         companySite: props.companySite,
         humanizedSite: props.site && humanizeUrl(props.site),
-        humanizedCompanySite: props.isCorporate && humanizeUrl(props.companySite),
+        humanizedCompanySite: (props.isCorporate && props.companySite) && humanizeUrl(props.companySite),
         publishConfig: props.publishConfig,
       };
 
