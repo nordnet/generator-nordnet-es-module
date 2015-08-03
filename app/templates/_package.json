@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "trash dist",
     "build": "babel src --out-dir dist",
-    "eslint": "eslint --ext=.js src",
+    "eslint": "eslint src",
     "eslint:jenkins": "eslint src -f checkstyle -o reports/lintresult.xml",
     "jscs": "jscs -c .jscsrc src",
     "lint": "npm-run-all jscs eslint",
