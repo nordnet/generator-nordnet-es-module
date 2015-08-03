@@ -11,6 +11,5 @@
   },
   "rules": {
     "no-use-before-define": [2, "nofunc"],
-    "comma-dangle": [2, "always-multiline"]
   }
 }
