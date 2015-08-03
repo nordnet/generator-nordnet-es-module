@@ -88,6 +88,8 @@ module.exports = yeoman.generators.Base.extend({
         return val.length > 0 ? true : 'You have to provide a publishConfig URL';
       }
     }], function (props) {
+      var licenseName = props.isCorporate ? props.companyName : this.user.git.name();
+      var licenseSite = props.isCorporate ? props.companySite : props.site;
       var tpl = {
         moduleName: props.moduleName,
         moduleDesc: props.moduleDesc,
@@ -96,9 +98,9 @@ module.exports = yeoman.generators.Base.extend({
         moduleLicense: props.moduleLicense,
         camelModuleName: _s.camelize(props.moduleName),
         github: props.isCorporate ? props.companyGithub : props.github,
-        licenseName: props.isCorporate ? props.companyName : this.user.git.name(),
-        licenseSite: props.isCorporate ? props.companySite : props.site,
-        humanizedLicenseSite: humanizeUrl(props.isCorporate ? props.companySite : props.site),
+        licenseName: licenseName,
+        licenseSite: licenseSite,
+        humanizedLicenseSite: licenseSite && humanizeUrl(licenseSite),
         name: this.user.git.name(),
         email: this.user.git.email(),
         site: props.site,
