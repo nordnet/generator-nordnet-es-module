@@ -7,14 +7,14 @@
     "registry": "<%= publishConfig %>"
   },<% } %>
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "trash dist",
     "build": "babel src --out-dir dist",
     "eslint": "eslint --ext=.js -c .eslintrc src",
     "jscs": "jscs -c .jscsrc src",
     "lint": "npm run jscs && npm run eslint",
-    "prelint:jenkins": "rimraf reports/lintresult.xml && mkdirp reports",
+    "prelint:jenkins": "trash reports/lintresult.xml && mkdirp reports",
     "lint:jenkins": "npm run jscs && eslint -c .eslintrc src -f checkstyle -o reports/lintresult.xml",
-    "pretest": "rimraf reports && mkdirp reports",
+    "pretest": "trash reports && mkdirp reports",
     "test": "BABEL_DISABLE_CACHE=1 mocha",
     "posttest": "npm run reports",
     "prereports": "echo '<?xml version=\"1.0\"?>' > reports/test-results.xml",
@@ -25,7 +25,7 @@
     "validate": "npm run lint && npm test",
     "prepush": "npm run validate",
     "prepublish": "npm run build",
-    "postpublish": "rimraf dist && git push --follow-tags"
+    "postpublish": "trash dist && git push --follow-tags"
   },
   "repository": {
     "type": "git",
@@ -52,8 +52,8 @@
     "jscs-jsdoc": "^1.1.0",
     "mkdirp": "^0.5.1",
     "mocha": "^2.2.5",
-    "rimraf": "^2.3.4",
     "sinon": "^1.15.4",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "trash": "^1.4.1"
   }
 }
