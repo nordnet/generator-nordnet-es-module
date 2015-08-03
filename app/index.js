@@ -109,7 +109,7 @@ module.exports = yeoman.generators.Base.extend({
         isOpensource: props.isOpensource,
         companyName: props.companyName,
         companySite: props.companySite,
-        humanizedSite: humanizeUrl(props.site),
+        humanizedSite: props.site && humanizeUrl(props.site),
         humanizedCompanySite: props.isCorporate && humanizeUrl(props.companySite),
         publishConfig: props.publishConfig,
       };
