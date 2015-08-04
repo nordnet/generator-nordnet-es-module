@@ -15,23 +15,23 @@ module.exports = yeoman.generators.Base.extend({
       message: 'corporate?',
       type: 'confirm',
       store: true,
-      default: true
+      default: true,
     }, {
       name: 'isOpensource',
       message: 'open-source?',
       type: 'confirm',
-      default: true
+      default: true,
     }, {
       name: 'moduleName',
       message: 'name:',
       default: this.appname.replace(/\s/g, '-'),
-      filter: function (val) { return _s.slugify(val); }
+      filter: function (val) { return _s.slugify(val); },
     }, {
       name: 'moduleDesc',
-      message: 'description:'
+      message: 'description:',
     }, {
       name: 'moduleKeywords',
-      message: 'keywords:'
+      message: 'keywords:',
     }, {
       name: 'moduleVersion',
       message: 'version:',
@@ -48,17 +48,17 @@ module.exports = yeoman.generators.Base.extend({
       store: true,
       validate: function (val) {
         return val.length > 0 ? true : 'You have to provide a username';
-      }
+      },
     }, {
       name: 'site',
       message: 'your site:',
       store: true,
-      filter: function (val) { return normalizeUrl(val); }
+      filter: function (val) { return normalizeUrl(val); },
     }, {
       when: function(props) { return props.isCorporate; },
       name: 'companyName',
       message: 'company name:',
-      store: true
+      store: true,
     }, {
       when: function(props) { return props.isCorporate; },
       name: 'companyGithub',
@@ -66,27 +66,27 @@ module.exports = yeoman.generators.Base.extend({
       store: true,
       validate: function (val) {
         return val.length > 0 ? true : 'You have to provide a username';
-      }
+      },
     }, {
       when: function(props) { return props.isCorporate; },
       name: 'companySite',
       message: 'company site:',
-      store: true
+      store: true,
     }, {
-      when: function(props) { return props.isCorporate && !props.isOpensource; },
+      when: function(props) { return !props.isOpensource; },
       name: 'repositoryUrl',
       message: 'repository url:',
       validate: function (val) {
         return val.length > 0 ? true : 'You have to repositoryUrl URL';
-      }
+      },
     }, {
-      when: function(props) { return props.isCorporate && !props.isOpensource; },
+      when: function(props) { return !props.isOpensource; },
       name: 'publishConfig',
       message: 'publishConfig:',
       store: true,
       validate: function (val) {
         return val.length > 0 ? true : 'You have to provide a publishConfig URL';
-      }
+      },
     }], function (props) {
       var name = this.user.git.name();
       var email = this.user.git.email();
