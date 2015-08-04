@@ -131,7 +131,7 @@ describe('generator', function() {
     });
   });
 
-  it.only('PKG validity, isCorporate true', function(cb) {
+  it('PKG validity, isCorporate true', function(cb) {
     helpers.mockPrompt(this.generator, { isCorporate: true });
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
@@ -141,7 +141,7 @@ describe('generator', function() {
     });
   });
 
-  it.only('PKG validity, isCorporate false', function(cb) {
+  it('PKG validity, isCorporate false', function(cb) {
     helpers.mockPrompt(this.generator, { isCorporate: false });
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
@@ -151,7 +151,7 @@ describe('generator', function() {
     });
   });
 
-  it.only('PKG validity, isOpensource true', function(cb) {
+  it('PKG validity, isOpensource true', function(cb) {
     helpers.mockPrompt(this.generator, { isOpensource: true });
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
@@ -161,7 +161,7 @@ describe('generator', function() {
     });
   });
 
-  it.only('PKG validity, isOpensource false', function(cb) {
+  it('PKG validity, isOpensource false', function(cb) {
     helpers.mockPrompt(this.generator, { isOpensource: false });
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
