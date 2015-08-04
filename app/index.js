@@ -88,29 +88,36 @@ module.exports = yeoman.generators.Base.extend({
         return val.length > 0 ? true : 'You have to provide a publishConfig URL';
       }
     }], function (props) {
-      var licenseName = props.isCorporate ? props.companyName : this.user.git.name();
+      var name = this.user.git.name();
+      var email = this.user.git.email();
+      var moduleKeywords = (props.moduleKeywords || '').trim().split(',').map(function(i) { return (i || '').trim(); });
+      var licenseName = props.isCorporate ? props.companyName : name;
       var licenseSite = props.isCorporate ? props.companySite : props.site;
+      var humanizedSite = props.site && humanizeUrl(props.site);
+      var humanizedCompanySite = (props.isCorporate && props.companySite) && humanizeUrl(props.companySite);
+      var humanizedLicenseSite = licenseSite && humanizeUrl(licenseSite);
+
       var tpl = {
         moduleName: props.moduleName,
+        camelModuleName: _s.camelize(props.moduleName),
         moduleDesc: props.moduleDesc,
-        moduleKeywords: (props.moduleKeywords || '').trim().split(',').map(function(i) { return (i || '').trim(); }),
+        moduleKeywords: moduleKeywords,
         moduleVersion: props.moduleVersion,
         moduleLicense: props.moduleLicense,
-        camelModuleName: _s.camelize(props.moduleName),
         github: props.isCorporate ? props.companyGithub : props.github,
         licenseName: licenseName,
         licenseSite: licenseSite,
-        humanizedLicenseSite: licenseSite && humanizeUrl(licenseSite),
-        name: this.user.git.name(),
-        email: this.user.git.email(),
+        humanizedLicenseSite: humanizedLicenseSite,
+        name: name,
+        email: email,
         site: props.site,
         repositoryUrl: props.repositoryUrl,
         isCorporate: props.isCorporate,
         isOpensource: props.isOpensource,
         companyName: props.companyName,
         companySite: props.companySite,
-        humanizedSite: props.site && humanizeUrl(props.site),
-        humanizedCompanySite: (props.isCorporate && props.companySite) && humanizeUrl(props.companySite),
+        humanizedSite: humanizedSite,
+        humanizedCompanySite: humanizedCompanySite,
         publishConfig: props.publishConfig,
       };
 
@@ -141,6 +148,6 @@ module.exports = yeoman.generators.Base.extend({
     }.bind(this));
   },
   install: function () {
-    this.installDependencies({bower: false});
+    this.installDependencies({ bower: false });
   }
 });
