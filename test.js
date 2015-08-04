@@ -2,6 +2,7 @@
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 var assert = require('yeoman-assert');
+var user = require('yeoman-generator/lib/actions/user').git;
 
 describe('generator', function () {
   beforeEach(function (cb) {
@@ -46,4 +47,86 @@ describe('generator', function () {
       cb();
     });
   });
+
+  it('README corporate true without site', function (cb) {
+    helpers.mockPrompt(this.generator, {
+      isCorporate: true,
+      moduleName: 'module',
+      companyName: 'Unicorn inc'
+    });
+
+    this.generator.run(function () {
+      assert.fileContent('README.md', /Unicorn inc/);
+      cb();
+    });
+  });
+
+  it('README corporate true with site', function (cb) {
+    helpers.mockPrompt(this.generator, {
+      isCorporate: true,
+      moduleName: 'module',
+      companyName: 'Unicorn inc',
+      companySite: 'Unicorn.inc',
+    });
+
+    this.generator.run(function () {
+      assert.fileContent('README.md', /Unicorn inc/);
+      assert.fileContent('README.md', /Unicorn.inc/);
+      cb();
+    });
+  });
+
+
+  it('README corporate false without site', function (cb) {
+    helpers.mockPrompt(this.generator, {
+      isCorporate: false,
+      moduleName: 'module',
+    });
+
+    this.generator.run(function () {
+      assert.fileContent('README.md', user.name());
+      cb();
+    });
+  });
+
+  it('README corporate false with site', function (cb) {
+    helpers.mockPrompt(this.generator, {
+      isCorporate: false,
+      moduleName: 'module',
+      site: 'asd'
+    });
+
+    this.generator.run(function () {
+      assert.fileContent('README.md', user.name());
+      cb();
+    });
+  });
+
+  it('README opensource true', function (cb) {
+    helpers.mockPrompt(this.generator, {
+      isOpensource: true,
+      moduleName: 'module',
+    });
+
+    this.generator.run(function () {
+      assert.fileContent('README.md', /NPM version/);
+      assert.fileContent('README.md', /npm-image/);
+      cb();
+    });
+  });
+
+  it('README opensource false', function (cb) {
+    helpers.mockPrompt(this.generator, {
+      isOpensource: false,
+      moduleName: 'module',
+    });
+
+    this.generator.run(function () {
+      assert.noFileContent('README.md', /NPM version/);
+      assert.noFileContent('README.md', /npm-image/);
+      cb();
+    });
+  });
+
+
 });
