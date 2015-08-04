@@ -35,8 +35,10 @@
   },
   "homepage": "https://github.com/nordnet/generator-nordnet-es-module#readme",
   "devDependencies": {
+    "assert": "^1.3.0",
     "babel": "*",
     "coveralls": "*",
+    "fs-extra": "^0.22.1",
     "istanbul": "*",
     "mocha": "*",
     "rimraf": "^2.4.2",
