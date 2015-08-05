@@ -237,4 +237,24 @@ describe('generator', function() {
     });
   });
 
+  it('PKG repository, isOpensource true', function(done) {
+    helpers.mockPrompt(this.generator, { isOpensource: true });
+    this.generator.run(function() {
+      fs.readJson('./package.json', function(err, res) {
+        equal(res.repository.url, 'git+https://github.com/iamstarkov/temp.git');
+        done();
+      })
+    });
+  });
+
+  it('PKG repository, isOpensource false', function(done) {
+    helpers.mockPrompt(this.generator, { isOpensource: false, repositoryUrl: 'git+https://private.git' });
+    this.generator.run(function() {
+      fs.readJson('./package.json', function(err, res) {
+        equal(res.repository.url, 'git+https://private.git');
+        done();
+      })
+    });
+  });
+
 });
