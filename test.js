@@ -204,7 +204,7 @@ describe('generator', function() {
     });
   });
 
-  it.only('PKG publishConfig', function(done) {
+  it('PKG publishConfig', function(done) {
     helpers.mockPrompt(this.generator, {
       isOpensource: false,
       publishConfig: 'sinopia.ftw'
@@ -212,6 +212,26 @@ describe('generator', function() {
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
         equal(res.publishConfig.registry, 'sinopia.ftw');
+        done();
+      })
+    });
+  });
+
+  it('PKG scripts, isOpensource true', function(done) {
+    helpers.mockPrompt(this.generator, { isOpensource: true });
+    this.generator.run(function() {
+      fs.readJson('./package.json', function(err, res) {
+        equal(Object.keys(res.scripts).length, 12);
+        done();
+      })
+    });
+  });
+
+  it('PKG scripts, isOpensource false', function(done) {
+    helpers.mockPrompt(this.generator, { isOpensource: false });
+    this.generator.run(function() {
+      fs.readJson('./package.json', function(err, res) {
+        equal(Object.keys(res.scripts).length, 23);
         done();
       })
     });
