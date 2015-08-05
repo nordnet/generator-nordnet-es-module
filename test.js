@@ -8,21 +8,21 @@ var user = require('yeoman-generator/lib/actions/user').git;
 var fs = require('fs-extra');
 
 describe('generator', function() {
-  beforeEach(function(cb) {
+  beforeEach(function(done) {
     var deps = ['../app'];
 
     helpers.testDirectory(path.join(__dirname, 'temp'), function(err) {
       if (err) {
-        cb(err);
+        done(err);
         return;
       }
 
       this.generator = helpers.createGenerator('nordnet-es-module:app', deps, null, {skipInstall: true});
-      cb();
+      done();
     }.bind(this));
   });
 
-  it('generates expected files', function(cb) {
+  it('generates expected files', function(done) {
 
     var expected = [
       '.jscsrc',
@@ -47,11 +47,11 @@ describe('generator', function() {
 
     this.generator.run(function() {
       assert.file(expected);
-      cb();
+      done();
     });
   });
 
-  it('README corporate true without site', function(cb) {
+  it('README corporate true without site', function(done) {
     helpers.mockPrompt(this.generator, {
       isCorporate: true,
       moduleName: 'module',
@@ -60,11 +60,11 @@ describe('generator', function() {
 
     this.generator.run(function() {
       assert.fileContent('README.md', /Unicorn inc/);
-      cb();
+      done();
     });
   });
 
-  it('README corporate true with site', function(cb) {
+  it('README corporate true with site', function(done) {
     helpers.mockPrompt(this.generator, {
       isCorporate: true,
       moduleName: 'module',
@@ -75,12 +75,12 @@ describe('generator', function() {
     this.generator.run(function() {
       assert.fileContent('README.md', /Unicorn inc/);
       assert.fileContent('README.md', /Unicorn.inc/);
-      cb();
+      done();
     });
   });
 
 
-  it('README corporate false without site', function(cb) {
+  it('README corporate false without site', function(done) {
     helpers.mockPrompt(this.generator, {
       isCorporate: false,
       moduleName: 'module',
@@ -88,11 +88,11 @@ describe('generator', function() {
 
     this.generator.run(function() {
       assert.fileContent('README.md', user.name());
-      cb();
+      done();
     });
   });
 
-  it('README corporate false with site', function(cb) {
+  it('README corporate false with site', function(done) {
     helpers.mockPrompt(this.generator, {
       isCorporate: false,
       moduleName: 'module',
@@ -101,11 +101,11 @@ describe('generator', function() {
 
     this.generator.run(function() {
       assert.fileContent('README.md', user.name());
-      cb();
+      done();
     });
   });
 
-  it('README opensource true', function(cb) {
+  it('README opensource true', function(done) {
     helpers.mockPrompt(this.generator, {
       isOpensource: true,
       moduleName: 'module',
@@ -114,11 +114,11 @@ describe('generator', function() {
     this.generator.run(function() {
       assert.fileContent('README.md', /NPM version/);
       assert.fileContent('README.md', /npm-image/);
-      cb();
+      done();
     });
   });
 
-  it('README opensource false', function(cb) {
+  it('README opensource false', function(done) {
     helpers.mockPrompt(this.generator, {
       isOpensource: false,
       moduleName: 'module',
@@ -127,47 +127,79 @@ describe('generator', function() {
     this.generator.run(function() {
       assert.noFileContent('README.md', /NPM version/);
       assert.noFileContent('README.md', /npm-image/);
-      cb();
+      done();
     });
   });
 
-  it('PKG validity, isCorporate true', function(cb) {
+  it('PKG validity, isCorporate true', function(done) {
     helpers.mockPrompt(this.generator, { isCorporate: true });
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
         doesNotThrow(function() { if (err) throw err; }, /Unexpected token/);
-        cb();
+        done();
       });
     });
   });
 
-  it('PKG validity, isCorporate false', function(cb) {
+  it('PKG validity, isCorporate false', function(done) {
     helpers.mockPrompt(this.generator, { isCorporate: false });
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
         doesNotThrow(function() { if (err) throw err; }, /Unexpected token/);
-        cb();
+        done();
       });
     });
   });
 
-  it('PKG validity, isOpensource true', function(cb) {
+  it('PKG validity, isOpensource true', function(done) {
     helpers.mockPrompt(this.generator, { isOpensource: true });
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
         doesNotThrow(function() { if (err) throw err; }, /Unexpected token/);
-        cb();
+        done();
       });
     });
   });
 
-  it('PKG validity, isOpensource false', function(cb) {
+  it('PKG validity, isOpensource false', function(done) {
     helpers.mockPrompt(this.generator, { isOpensource: false });
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
         doesNotThrow(function() { if (err) throw err; }, /Unexpected token/);
-        cb();
+        done();
       });
+    });
+  });
+
+  it('PKG crossplatform, isCorporate true', function(done) {
+    helpers.mockPrompt(this.generator, { isCorporate: true });
+    this.generator.run(function() {
+      assert.noFileContent('package.json', /&&/);
+      done();
+    });
+  });
+
+  it('PKG crossplatform, isCorporate false', function(done) {
+    helpers.mockPrompt(this.generator, { isCorporate: false });
+    this.generator.run(function() {
+      assert.noFileContent('package.json', /&&/);
+      done();
+    });
+  });
+
+  it('PKG crossplatform, isOpensource true', function(done) {
+    helpers.mockPrompt(this.generator, { isOpensource: true });
+    this.generator.run(function() {
+      assert.noFileContent('package.json', /&&/);
+      done();
+    });
+  });
+
+  it('PKG crossplatform, isOpensource false', function(done) {
+    helpers.mockPrompt(this.generator, { isOpensource: false });
+    this.generator.run(function() {
+      assert.noFileContent('package.json', /&&/);
+      done();
     });
   });
 
