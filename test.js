@@ -3,6 +3,7 @@ var path = require('path');
 var helpers = require('yeoman-generator').test;
 var throws = require('assert').throws;
 var doesNotThrow = require('assert').doesNotThrow;
+var equal = require('assert').equal;
 var assert = require('yeoman-assert');
 var user = require('yeoman-generator/lib/actions/user').git;
 var fs = require('fs-extra');
@@ -200,6 +201,19 @@ describe('generator', function() {
     this.generator.run(function() {
       assert.noFileContent('package.json', /&&/);
       done();
+    });
+  });
+
+  it.only('PKG publishConfig', function(done) {
+    helpers.mockPrompt(this.generator, {
+      isOpensource: false,
+      publishConfig: 'sinopia.ftw'
+    });
+    this.generator.run(function() {
+      fs.readJson('./package.json', function(err, res) {
+        equal(res.publishConfig.registry, 'sinopia.ftw');
+        done();
+      })
     });
   });
 
