@@ -257,4 +257,24 @@ describe('generator', function() {
     });
   });
 
+  it('PKG bugs', function(done) {
+    helpers.mockPrompt(this.generator);
+    this.generator.run(function() {
+      fs.readJson('./package.json', function(err, res) {
+        equal(res.bugs.url, 'https://github.com/iamstarkov/temp/issues');
+        done();
+      })
+    });
+  });
+
+  it('PKG homepage', function(done) {
+    helpers.mockPrompt(this.generator);
+    this.generator.run(function() {
+      fs.readJson('./package.json', function(err, res) {
+        equal(res.homepage, 'https://github.com/iamstarkov/temp#readme');
+        done();
+      })
+    });
+  });
+
 });
