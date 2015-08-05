@@ -238,10 +238,10 @@ describe('generator', function() {
   });
 
   it('PKG repository, isOpensource true', function(done) {
-    helpers.mockPrompt(this.generator, { isOpensource: true });
+    helpers.mockPrompt(this.generator, { github: 'nordnet' });
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
-        equal(res.repository.url, 'git+https://github.com/iamstarkov/temp.git');
+        equal(res.repository.url, 'git+https://github.com/nordnet/temp.git');
         done();
       })
     });
@@ -258,20 +258,20 @@ describe('generator', function() {
   });
 
   it('PKG bugs', function(done) {
-    helpers.mockPrompt(this.generator);
+    helpers.mockPrompt(this.generator, { github: 'nordnet' });
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
-        equal(res.bugs.url, 'https://github.com/iamstarkov/temp/issues');
+        equal(res.bugs.url, 'https://github.com/nordnet/temp/issues');
         done();
       })
     });
   });
 
   it('PKG homepage', function(done) {
-    helpers.mockPrompt(this.generator);
+    helpers.mockPrompt(this.generator, { github: 'nordnet' });
     this.generator.run(function() {
       fs.readJson('./package.json', function(err, res) {
-        equal(res.homepage, 'https://github.com/iamstarkov/temp#readme');
+        equal(res.homepage, 'https://github.com/nordnet/temp#readme');
         done();
       })
     });
