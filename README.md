@@ -2,7 +2,6 @@
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
-[![Coveralls Status][coveralls-image]][coveralls-url]
 [![Dependency Status][depstat-image]][depstat-url]
 
 > Scaffold out an ES6 node module
@@ -69,9 +68,6 @@ MIT © [Nordnet Bank AB](https://www.nordnet.se/)
 
 [travis-url]: https://travis-ci.org/nordnet/generator-nordnet-es-module
 [travis-image]: https://img.shields.io/travis/nordnet/generator-nordnet-es-module.svg?style=flat-square
-
-[coveralls-url]: https://coveralls.io/r/nordnet/generator-nordnet-es-module
-[coveralls-image]: https://img.shields.io/coveralls/nordnet/generator-nordnet-es-module.svg?style=flat-square
 
 [depstat-url]: https://david-dm.org/nordnet/generator-nordnet-es-module
 [depstat-image]: https://david-dm.org/nordnet/generator-nordnet-es-module.svg?style=flat-square
