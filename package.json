@@ -8,7 +8,7 @@
     "coveralls": "coveralls < coverage/lcov.info",
     "pretest": "rimraf temp",
     "eslint": "eslint app test",
-    "test": "mocha",
+    "test": "mocha --require babel-core/register",
     "tdd": "npm test -- --watch",
     "postpublish": "git push --follow-tags"
   },
