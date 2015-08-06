@@ -10,7 +10,7 @@ var fs = require('fs-extra');
 
 describe('generator', function() {
   beforeEach(function(done) {
-    var deps = ['../app'];
+    var deps = ['../../app'];
 
     helpers.testDirectory(path.join(__dirname, 'temp'), function(err) {
       if (err) {
