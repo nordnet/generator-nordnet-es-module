@@ -8,76 +8,78 @@ module.exports = yeoman.generators.Base.extend({
   init() {
     const cb = this.async();
 
-    this.prompt([{
-      name: 'isCorporate',
-      message: 'corporate?',
-      type: 'confirm',
-      store: true,
-      default: true,
-    }, {
-      name: 'isOpensource',
-      message: 'open-source?',
-      type: 'confirm',
-      default: true,
-    }, {
-      name: 'moduleName',
-      message: 'name:',
-      default: this.appname.replace(/\s/g, '-'),
-      filter: val => _s.slugify(val),
-    }, {
-      name: 'moduleDesc',
-      message: 'description:',
-    }, {
-      name: 'moduleKeywords',
-      message: 'keywords:',
-    }, {
-      name: 'moduleVersion',
-      message: 'version:',
-      store: true,
-      default: '0.0.0',
-    }, {
-      name: 'moduleLicense',
-      message: 'license:',
-      store: true,
-      default: 'MIT',
-    }, {
-      name: 'github',
-      message: 'your github:',
-      store: true,
-      validate: val => (val.length > 0) ? true : 'You have to provide a username',
-    }, {
-      name: 'site',
-      message: 'your site:',
-      store: true,
-      filter: val => normalizeUrl(val),
-    }, {
-      when: props => props.isCorporate,
-      name: 'companyName',
-      message: 'company name:',
-      store: true,
-    }, {
-      when: props => props.isCorporate,
-      name: 'companyGithub',
-      message: 'company github:',
-      store: true,
-      validate: val => (val.length > 0) ? true : 'You have to provide a username',
-    }, {
-      when: props => props.isCorporate,
-      name: 'companySite',
-      message: 'company site:',
-      store: true,
-    }, {
-      when: props => !props.isOpensource,
-      name: 'repositoryUrl',
-      message: 'repository url:',
-      validate: val => (val.length > 0) ? true : 'You have to repositoryUrl URL',
-    }, {
-      when: props => !props.isOpensource,
-      name: 'publishConfig',
-      message: 'publishConfig:',
-      store: true,
-      validate: val => (val.length > 0) ? true : 'You have to provide a publishConfig URL',
-    }], props => {
+    this.prompt([
+      {
+        name: 'isCorporate',
+        message: 'corporate?',
+        type: 'confirm',
+        store: true,
+        default: true,
+      }, {
+        name: 'isOpensource',
+        message: 'open-source?',
+        type: 'confirm',
+        default: true,
+      }, {
+        name: 'moduleName',
+        message: 'name:',
+        default: this.appname.replace(/\s/g, '-'),
+        filter: val => _s.slugify(val),
+      }, {
+        name: 'moduleDesc',
+        message: 'description:',
+      }, {
+        name: 'moduleKeywords',
+        message: 'keywords:',
+      }, {
+        name: 'moduleVersion',
+        message: 'version:',
+        store: true,
+        default: '0.0.0',
+      }, {
+        name: 'moduleLicense',
+        message: 'license:',
+        store: true,
+        default: 'MIT',
+      }, {
+        name: 'github',
+        message: 'your github:',
+        store: true,
+        validate: val => (val.length > 0) ? true : 'You have to provide a username',
+      }, {
+        name: 'site',
+        message: 'your site:',
+        store: true,
+        filter: val => normalizeUrl(val),
+      }, {
+        when: props => props.isCorporate,
+        name: 'companyName',
+        message: 'company name:',
+        store: true,
+      }, {
+        when: props => props.isCorporate,
+        name: 'companyGithub',
+        message: 'company github:',
+        store: true,
+        validate: val => (val.length > 0) ? true : 'You have to provide a username',
+      }, {
+        when: props => props.isCorporate,
+        name: 'companySite',
+        message: 'company site:',
+        store: true,
+      }, {
+        when: props => !props.isOpensource,
+        name: 'repositoryUrl',
+        message: 'repository url:',
+        validate: val => (val.length > 0) ? true : 'You have to repositoryUrl URL',
+      }, {
+        when: props => !props.isOpensource,
+        name: 'publishConfig',
+        message: 'publishConfig:',
+        store: true,
+        validate: val => (val.length > 0) ? true : 'You have to provide a publishConfig URL',
+      },
+    ], props => {
       const name = this.user.git.name();
       const email = this.user.git.email();
       const moduleKeywords = (props.moduleKeywords || '').trim().split(',').map(i => (i || '').trim());
@@ -137,6 +139,7 @@ module.exports = yeoman.generators.Base.extend({
       cb();
     }.bind(this));
   },
+
   install() {
     this.installDependencies({ bower: false });
   },

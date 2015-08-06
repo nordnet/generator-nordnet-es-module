@@ -6,91 +6,91 @@ import { git as user } from 'yeoman-generator/lib/actions/user';
 import fs from 'fs-extra';
 
 describe('generator', () => {
-  let ctx;
+  let _this;
   beforeEach(function beforeEachHook(done) {
-    ctx = this;
+    _this = this;
     helpers.testDirectory(path.join(__dirname, 'temp'), err => {
       if (err) {
         done(err);
         return;
       }
-      ctx.generator = helpers.createGenerator('nordnet-es-module:app', ['../../app'], null, { skipInstall: true });
+
+      _this.generator = helpers.createGenerator('nordnet-es-module:app', ['../../app'], null, { skipInstall: true });
       done();
     });
   });
 
   it('generates expected files', done => {
-    helpers.mockPrompt(ctx.generator, {
+    helpers.mockPrompt(_this.generator, {
       moduleName: 'module',
       moduleDesc: 'Your awsm module!',
     });
 
-    ctx.generator.run(() => {
-      assert.file([ '.jscsrc', '.eslintrc', '.eslintignore', '.editorconfig', '.gitignore', '.npmignore', '.travis.yml', '.istanbul.yml', 'package.json', 'README.md', 'src/index.js', 'test/index.test.js', 'test/mocha.opts' ]);
+    _this.generator.run(() => {
+      assert.file(['.jscsrc', '.eslintrc', '.eslintignore', '.editorconfig', '.gitignore', '.npmignore', '.travis.yml', '.istanbul.yml', 'package.json', 'README.md', 'src/index.js', 'test/index.test.js', 'test/mocha.opts']);
       done();
     });
   });
 
   it('README corporate true without site', done => {
-    helpers.mockPrompt(ctx.generator, {
+    helpers.mockPrompt(_this.generator, {
       isCorporate: true,
       moduleName: 'module',
       companyName: 'Unicorn inc',
     });
 
-    ctx.generator.run(() => {
+    _this.generator.run(() => {
       assert.fileContent('README.md', /Unicorn inc/);
       done();
     });
   });
 
   it('README corporate true with site', done => {
-    helpers.mockPrompt(ctx.generator, {
+    helpers.mockPrompt(_this.generator, {
       isCorporate: true,
       moduleName: 'module',
       companyName: 'Unicorn inc',
       companySite: 'Unicorn.inc',
     });
 
-    ctx.generator.run(() => {
+    _this.generator.run(() => {
       assert.fileContent('README.md', /Unicorn inc/);
       assert.fileContent('README.md', /Unicorn.inc/);
       done();
     });
   });
 
-
   it.only('README corporate false without site', done => {
-    helpers.mockPrompt(ctx.generator, {
+    helpers.mockPrompt(_this.generator, {
       isCorporate: false,
       moduleName: 'module',
     });
-    ctx.generator.run(() => {
+    _this.generator.run(() => {
       assert.fileContent('README.md', user.name());
       done();
     });
   });
 
   it('README corporate false with site', done => {
-    helpers.mockPrompt(ctx.generator, {
+    helpers.mockPrompt(_this.generator, {
       isCorporate: false,
       moduleName: 'module',
       site: 'asd',
     });
 
-    ctx.generator.run(() => {
+    _this.generator.run(() => {
       assert.fileContent('README.md', user.name());
       done();
     });
   });
 
   it('README opensource true', done => {
-    helpers.mockPrompt(ctx.generator, {
+    helpers.mockPrompt(_this.generator, {
       isOpensource: true,
       moduleName: 'module',
     });
 
-    ctx.generator.run(() => {
+    _this.generator.run(() => {
       assert.fileContent('README.md', /NPM version/);
       assert.fileContent('README.md', /npm-image/);
       done();
@@ -98,12 +98,12 @@ describe('generator', () => {
   });
 
   it('README opensource false', done => {
-    helpers.mockPrompt(ctx.generator, {
+    helpers.mockPrompt(_this.generator, {
       isOpensource: false,
       moduleName: 'module',
     });
 
-    ctx.generator.run(() => {
+    _this.generator.run(() => {
       assert.noFileContent('README.md', /NPM version/);
       assert.noFileContent('README.md', /npm-image/);
       done();
@@ -111,83 +111,87 @@ describe('generator', () => {
   });
 
   it('PKG validity, isCorporate true', done => {
-    helpers.mockPrompt(ctx.generator, { isCorporate: true });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { isCorporate: true });
+    _this.generator.run(() => {
       fs.readJson('./package.json', err => {
         doesNotThrow(() => { if (err) throw err; }, /Unexpected token/);
+
         done();
       });
     });
   });
 
   it('PKG validity, isCorporate false', done => {
-    helpers.mockPrompt(ctx.generator, { isCorporate: false });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { isCorporate: false });
+    _this.generator.run(() => {
       fs.readJson('./package.json', err => {
         doesNotThrow(() => { if (err) throw err; }, /Unexpected token/);
+
         done();
       });
     });
   });
 
   it('PKG validity, isOpensource true', done => {
-    helpers.mockPrompt(ctx.generator, { isOpensource: true });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { isOpensource: true });
+    _this.generator.run(() => {
       fs.readJson('./package.json', err => {
         doesNotThrow(() => { if (err) throw err; }, /Unexpected token/);
+
         done();
       });
     });
   });
 
   it('PKG validity, isOpensource false', done => {
-    helpers.mockPrompt(ctx.generator, { isOpensource: false });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { isOpensource: false });
+    _this.generator.run(() => {
       fs.readJson('./package.json', err => {
         doesNotThrow(() => { if (err) throw err; }, /Unexpected token/);
+
         done();
       });
     });
   });
 
   it('PKG crossplatform, isCorporate true', done => {
-    helpers.mockPrompt(ctx.generator, { isCorporate: true });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { isCorporate: true });
+    _this.generator.run(() => {
       assert.noFileContent('package.json', /&&/);
       done();
     });
   });
 
   it('PKG crossplatform, isCorporate false', done => {
-    helpers.mockPrompt(ctx.generator, { isCorporate: false });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { isCorporate: false });
+    _this.generator.run(() => {
       assert.noFileContent('package.json', /&&/);
       done();
     });
   });
 
   it('PKG crossplatform, isOpensource true', done => {
-    helpers.mockPrompt(ctx.generator, { isOpensource: true });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { isOpensource: true });
+    _this.generator.run(() => {
       assert.noFileContent('package.json', /&&/);
       done();
     });
   });
 
   it('PKG crossplatform, isOpensource false', done => {
-    helpers.mockPrompt(ctx.generator, { isOpensource: false });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { isOpensource: false });
+    _this.generator.run(() => {
       assert.noFileContent('package.json', /&&/);
       done();
     });
   });
 
   it('PKG publishConfig', done => {
-    helpers.mockPrompt(ctx.generator, {
+    helpers.mockPrompt(_this.generator, {
       isOpensource: false,
       publishConfig: 'sinopia.ftw',
     });
-    ctx.generator.run(() => {
+    _this.generator.run(() => {
       fs.readJson('./package.json', (err, res) => {
         equal(res.publishConfig.registry, 'sinopia.ftw');
         done();
@@ -196,8 +200,8 @@ describe('generator', () => {
   });
 
   it('PKG scripts, isOpensource true', done => {
-    helpers.mockPrompt(ctx.generator, { isOpensource: true });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { isOpensource: true });
+    _this.generator.run(() => {
       fs.readJson('./package.json', (err, res) => {
         equal(Object.keys(res.scripts).length, 12);
         done();
@@ -206,8 +210,8 @@ describe('generator', () => {
   });
 
   it('PKG scripts, isOpensource false', done => {
-    helpers.mockPrompt(ctx.generator, { isOpensource: false });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { isOpensource: false });
+    _this.generator.run(() => {
       fs.readJson('./package.json', (err, res) => {
         equal(Object.keys(res.scripts).length, 23);
         done();
@@ -216,8 +220,8 @@ describe('generator', () => {
   });
 
   it('PKG repository, isOpensource true', done => {
-    helpers.mockPrompt(ctx.generator, { github: 'nordnet' });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { github: 'nordnet' });
+    _this.generator.run(() => {
       fs.readJson('./package.json', (err, res) => {
         equal(res.repository.url, 'git+https://github.com/nordnet/temp.git');
         done();
@@ -226,8 +230,8 @@ describe('generator', () => {
   });
 
   it('PKG repository, isOpensource false', done => {
-    helpers.mockPrompt(ctx.generator, { isOpensource: false, repositoryUrl: 'git+https://private.git' });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { isOpensource: false, repositoryUrl: 'git+https://private.git' });
+    _this.generator.run(() => {
       fs.readJson('./package.json', (err, res) => {
         equal(res.repository.url, 'git+https://private.git');
         done();
@@ -236,8 +240,8 @@ describe('generator', () => {
   });
 
   it('PKG bugs', done => {
-    helpers.mockPrompt(ctx.generator, { github: 'nordnet' });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { github: 'nordnet' });
+    _this.generator.run(() => {
       fs.readJson('./package.json', (err, res) => {
         equal(res.bugs.url, 'https://github.com/nordnet/temp/issues');
         done();
@@ -246,8 +250,8 @@ describe('generator', () => {
   });
 
   it('PKG homepage', done => {
-    helpers.mockPrompt(ctx.generator, { github: 'nordnet' });
-    ctx.generator.run(() => {
+    helpers.mockPrompt(_this.generator, { github: 'nordnet' });
+    _this.generator.run(() => {
       fs.readJson('./package.json', (err, res) => {
         equal(res.homepage, 'https://github.com/nordnet/temp#readme');
         done();
