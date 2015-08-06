@@ -8,11 +8,15 @@
   },<% } %>
   "scripts": {
     "clean": "trash dist",
-    "build": "babel src --out-dir dist",
+    "transpile": "babel src --out-dir dist",
     "eslint": "eslint src",
-    "eslint:jenkins": "eslint src -f checkstyle -o reports/lintresult.xml",
-    "jscs": "jscs -c .jscsrc src",
+    "jscs": "jscs src",
     "lint": "npm-run-all jscs eslint",
+    <% if (isOpensource) { %>
+    "test": "mocha",
+    "tdd": "npm test -- --watch",
+    <% } else { %>
+    "eslint:jenkins": "eslint src -f checkstyle -o reports/lintresult.xml",
     "reports:rm": "trash reports/",
     "reports:mkdir": "mkdirp reports",
     "prelint:jenkins": "npm-run-all reports:rm reports:mkdir",
@@ -20,26 +24,32 @@
     "pretest": "npm-run-all reports:rm reports:mkdir",
     "test": "BABEL_DISABLE_CACHE=1 mocha",
     "posttest": "npm run reports",
+    "tdd": "npm test -- --watch",
     "prereports": "echo '<?xml version=\"1.0\"?>' > reports/test-results.xml",
     "reports": "npm-run-all reports:tests reports:coverage",
     "reports:tests": "BABEL_DISABLE_CACHE=1 mocha --reporter xunit | grep \"<\" >> reports/test-results.xml",
-    "reports:coverage": "BABEL_DISABLE_CACHE=1 istanbul cover node_modules/mocha/bin/_mocha",
-    "tdd": "npm test -- --watch",
+    "reports:coverage": "BABEL_DISABLE_CACHE=1 istanbul cover _mocha",
+    <% } %>
     "validate": "npm-run-all lint test",
     "prepush": "npm run validate",
-    "prepublish": "npm run build",
+    "prepublish": "npm run transpile",
     "push": "git push --follow-tags",
     "postpublish": "npm-run-all clean push"
   },
   "repository": {
     "type": "git",
-    "url": "<%= repositoryUrl %>"
+    "url": <% if (isOpensource) { %>"git+https://github.com/<%= github %>/<%= moduleName %>.git"<% } else { %>"<%= repositoryUrl %>"<% } %>
   },
   "keywords": [
     <% moduleKeywords.forEach(function(keyword, i, arr) { %>"<%= keyword %>"<% if (i !== arr.length - 1) { %>,
     <% } %><% }); %>
   ],
-  "author": "<%= name %> <<%= email %>>",
+  "author": "<%= name %> <<%= email %>> <% if (site) { %>(<%= humanizedSite %>)<% } %>",
+  "license": "<%= moduleLicense %>",
+  <% if (isOpensource) { %>"bugs": {
+    "url": "https://github.com/<%= github %>/<%= moduleName %>/issues"
+  },
+  "homepage": "https://github.com/<%= github %>/<%= moduleName %>#readme",<% } %>
   "devDependencies": {
     "babel": "^5.5.8",
     "babel-core": "^5.6.18",
