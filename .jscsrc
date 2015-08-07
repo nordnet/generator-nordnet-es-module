@@ -2,8 +2,8 @@
   "plugins": ["jscs-config-nordnet"],
   "preset": "nordnet",
   "excludeFiles": [
-    "app/templates/_index.test.js",
-    "app/templates/_index.js",
+    "app/templates/**",
+    "app/index.js",
     "temp/**"
   ]
 }

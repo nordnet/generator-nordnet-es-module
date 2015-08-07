@@ -27,7 +27,7 @@ describe('generator', () => {
     });
 
     _this.generator.run(() => {
-      assert.file(['.jscsrc', '.eslintrc', '.eslintignore', '.editorconfig', '.gitignore', '.npmignore', '.travis.yml', '.istanbul.yml', 'package.json', 'README.md', 'src/index.js', 'test/index.test.js', 'test/mocha.opts']);
+      assert.file(['.jscsrc', '.eslintrc', '.eslintignore', '.editorconfig', '.gitignore', '.npmignore', '.travis.yml', '.istanbul.yml', 'package.json', 'README.md', 'src/index.js', 'test/test.js', 'test/mocha.opts']);
       done();
     });
   });

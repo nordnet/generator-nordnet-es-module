@@ -2,16 +2,22 @@
   "name": "generator-nordnet-es-module",
   "version": "0.1.0",
   "description": "Scaffold out an ES6 node module",
+  "not-ready-scripts": {
+    "transpile": "babel app/index.es6.js --out-file app/index.js",
+    "transpile:dev": "npm run transpile --watch",
+    "prepublish": "npm run transpile"
+  },
   "scripts": {
-    "coverage": "istanbul cover _mocha app/index.js",
-    "precoveralls": "npm run coverage",
-    "coveralls": "coveralls < coverage/lcov.info",
-    "pretest": "rimraf temp",
+    "lint": "npm-run-all jscs eslint",
+    "clean": "rimraf app/index.es5.js",
     "eslint": "eslint app test",
     "jscs": "jscs app test",
     "test": "mocha --require babel/register",
+    "pretest": "rimraf temp",
     "tdd": "npm test -- --watch",
-    "postpublish": "git push --follow-tags"
+    "validate": "npm-run-all lint test",
+    "prepush": "npm run validate",
+    "postpublish": "npm-run-all clean push"
   },
   "repository": {
     "type": "git",
@@ -40,17 +46,17 @@
     "assert": "*",
     "babel": "*",
     "babel-eslint": "*",
-    "babel-jscs": "^2.0.3",
-    "coveralls": "*",
+    "babel-jscs": "*",
     "eslint": "*",
     "eslint-config-airbnb": "*",
     "eslint-config-nordnet": "*",
     "eslint-plugin-react": "*",
     "fs-extra": "*",
-    "istanbul": "*",
+    "husky": "*",
     "jscs": "*",
     "jscs-config-nordnet": "*",
     "mocha": "*",
+    "npm-run-all": "*",
     "rimraf": "*",
     "yeoman-assert": "*"
   },

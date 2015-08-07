@@ -4,5 +4,3 @@ node_js:
   - '0.10'
   - 'iojs-2'
   - 'iojs-1'
-after_script:
-  - npm run coveralls

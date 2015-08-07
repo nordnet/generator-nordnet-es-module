@@ -9,6 +9,7 @@
   "scripts": {
     "clean": "trash dist",
     "transpile": "babel src --out-dir dist",
+
     "eslint": "eslint src",
     "jscs": "jscs src",
     "lint": "npm-run-all jscs eslint",
@@ -30,6 +31,7 @@
     "reports:tests": "BABEL_DISABLE_CACHE=1 mocha --reporter xunit | grep \"<\" >> reports/test-results.xml",
     "reports:coverage": "BABEL_DISABLE_CACHE=1 istanbul cover _mocha",
     <% } %>
+
     "validate": "npm-run-all lint test",
     "prepush": "npm run validate",
     "prepublish": "npm run transpile",
