@@ -11,9 +11,13 @@
 * Structured and trustworthy README
 * Tests, tdd and test coverage
 * [Ready to use with travis and coveralls](#next-steps)
-* Eslint, jscs and editorconfig support
+* [Eslint][eslint-config], [jscs][jscs-config] and [editorconfig][editorconfig] support
 * Windows friendly
 * ![Badges][badges]
+
+[eslint-config]: https://github.com/nordnet/eslint-config-nordnet
+[jscs-config]: https://github.com/nordnet/jscs-config-nordnet
+[editorconfig]: http://editorconfig.org/
 
 ## For whom?
 
