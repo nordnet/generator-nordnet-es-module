@@ -16,7 +16,7 @@
 
     "pretest": "npm-run-all lint transpile",
     "tdd": "npm test -- --watch",
-    "prepush": "npm run validate",
+    "prepush": "npm test",
     "prepublish": "npm run transpile",
     "postpublish": "npm-run-all clean push"
   },
