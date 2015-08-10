@@ -3,20 +3,21 @@
   "version": "0.1.0",
   "description": "Scaffold out an ES6 node module",
   "not-ready-scripts": {
-    "transpile": "babel app/index.es6.js --out-file app/index.js",
-    "transpile:dev": "npm run transpile --watch",
-    "prepublish": "npm run transpile"
   },
   "scripts": {
-    "lint": "npm-run-all jscs eslint",
-    "clean": "rimraf app/index.es5.js",
+    "transpile": "babel app/index.es6.js --out-file app/index.js",
+    "transpile:dev": "npm run transpile --watch",
+
+    "lint": "npm-run-all eslint",
+    "clean": "rimraf temp app/index.js",
     "eslint": "eslint app test",
     "jscs": "jscs app test",
     "test": "mocha --require babel/register",
-    "pretest": "rimraf temp",
+
+    "pretest": "npm-run-all lint transpile",
     "tdd": "npm test -- --watch",
-    "validate": "npm-run-all lint test",
     "prepush": "npm run validate",
+    "prepublish": "npm run transpile",
     "postpublish": "npm-run-all clean push"
   },
   "repository": {
