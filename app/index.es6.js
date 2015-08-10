@@ -1,10 +1,10 @@
-import yeoman from 'yeoman-generator';
+import { Base } from 'yeoman-generator';
 import _s from 'underscore.string';
 import mkdirp from 'mkdirp';
 import normalizeUrl from 'normalize-url';
 import humanizeUrl from 'humanize-url';
 
-module.exports = yeoman.generators.Base.extend({
+export default class NordnetEsModule extends Base {
   init() {
     const cb = this.async();
 
@@ -137,10 +137,10 @@ module.exports = yeoman.generators.Base.extend({
       cpTpl('mocha.opts',     'test/mocha.opts');
 
       cb();
-    }.bind(this));
-  },
+    });
+  }
 
   install() {
     this.installDependencies({ bower: false });
-  },
-});
+  }
+}
