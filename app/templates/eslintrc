@@ -1,13 +1,3 @@
 {
-  "extends": "eslint-config-airbnb",
-  "env": {
-    "mocha": true,
-    "es6": true
-  },
-  "globals": {
-    "sinon": true
-  },
-  "rules": {
-    "no-use-before-define": [2, "nofunc"],
-  }
+  "extends": "eslint-config-nordnet"
 }
