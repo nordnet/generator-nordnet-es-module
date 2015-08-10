@@ -1,15 +1,4 @@
 {
-  "esprima": "./node_modules/babel-jscs",
-  "preset": "airbnb",
-  "esnext": true,
-  "verbose": true,
-
-  "fileExtensions": [".js"],
-
-  "excludeFiles": [
-    "dist/**",
-    "node_modules/**"
-  ],
-
-  "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties"
+  "plugins": ["jscs-config-nordnet"],
+  "preset": "nordnet"
 }
