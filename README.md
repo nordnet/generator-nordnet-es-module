@@ -40,7 +40,7 @@ Positive answer will lead to few questions about your company (name, github, sit
 Positive answer will lead to github optimised workflow, otherwize you
 will be asked about [publishConfig][sinopia] url and end up with custom stash'n'jenkins flow.
 
-![transparent-banking example](https://i.imgur.com/tqbTOVH.png)
+![transparent-banking example](https://i.imgur.com/gdvjTPj.png)
 
 [tdd]: https://iamstarkov.com/start-with-testing/
 [badges]: https://img.shields.io/badge/with-badges-brightgreen.svg?style=flat-square
