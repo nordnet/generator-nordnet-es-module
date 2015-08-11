@@ -60,7 +60,7 @@ describe('generator', () => {
     });
   });
 
-  it.only('README corporate false without site', done => {
+  it('README corporate false without site', done => {
     helpers.mockPrompt(_this.generator, {
       isCorporate: false,
       moduleName: 'module',
@@ -203,7 +203,7 @@ describe('generator', () => {
     helpers.mockPrompt(_this.generator, { isOpensource: true });
     _this.generator.run(() => {
       fs.readJson('./package.json', (err, res) => {
-        equal(Object.keys(res.scripts).length, 12);
+        equal(Object.keys(res.scripts).length, 15);
         done();
       });
     });
