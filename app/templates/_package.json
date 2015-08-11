@@ -9,13 +9,15 @@
   "scripts": {
     "clean": "trash dist",
     "transpile": "babel src --out-dir dist",
-
     "eslint": "eslint src test",
     "jscs": "jscs src test",
     "lint": "npm-run-all jscs eslint",
     <% if (isOpensource) { %>
     "test": "mocha",
     "tdd": "npm test -- --watch",
+    "coverage": "isparta cover _mocha src",
+    "precoveralls": "npm run coverage",
+    "coveralls": "coveralls < coverage/lcov.info",
     <% } else { %>
     "eslint:jenkins": "eslint src -f checkstyle -o reports/lintresult.xml",
     "reports:rm": "trash reports/",
