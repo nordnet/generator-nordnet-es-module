@@ -1,6 +1,6 @@
 {
   "name": "generator-nordnet-es-module",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Scaffold out an ES6 node module",
   "scripts": {
     "transpile": "babel app/index.es6.js --out-file app/index.js",
