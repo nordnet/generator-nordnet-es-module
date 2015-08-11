@@ -17,7 +17,7 @@
     "tdd": "npm test -- --watch",
     "coverage": "isparta cover _mocha src",
     "precoveralls": "npm run coverage",
-    "coveralls": "coveralls < coverage/lcov.info",
+    "coveralls": "coveralls < reports/coverage/istanbul/lcov.info",
     <% } else { %>
     "eslint:jenkins": "eslint src -f checkstyle -o reports/lintresult.xml",
     "reports:rm": "trash reports/",
@@ -33,7 +33,6 @@
     "reports:tests": "BABEL_DISABLE_CACHE=1 mocha --reporter xunit | grep \"<\" >> reports/test-results.xml",
     "reports:coverage": "BABEL_DISABLE_CACHE=1 istanbul cover _mocha",
     <% } %>
-
     "validate": "npm-run-all lint test",
     "prepush": "npm run validate",
     "prepublish": "npm run transpile",
@@ -55,12 +54,13 @@
   },
   "homepage": "https://github.com/<%= github %>/<%= moduleName %>#readme",<% } %>
   "devDependencies": {
-    "babel": "^5.5.8",
-    "babel-core": "^5.6.18",
+    "babel": "*",
+    "babel-core": "*",
     "babel-eslint": "*",
     "babel-jscs": "*",
-    "chai": "^3.0.0",
-    "chai-as-promised": "^5.1.0",
+    "chai": "*",
+    "chai-as-promised": "*",
+    "coveralls": "*",
     "eslint": "*",
     "eslint-config-airbnb": "*",
     "husky": "*",
@@ -71,11 +71,11 @@
     "eslint-config-airbnb": "*",
     "eslint-config-nordnet": "*",
     "eslint-plugin-react": "*",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "*",
     "mocha": "*",
     "npm-run-all": "*",
-    "sinon": "^1.15.4",
-    "sinon-chai": "^2.8.0",
+    "sinon": "*",
+    "sinon-chai": "*",
     "trash": "*"
   }
 }
