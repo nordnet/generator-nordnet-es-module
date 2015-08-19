@@ -31,7 +31,7 @@
     "prereports": "echo '<?xml version=\"1.0\"?>' > reports/test-results.xml",
     "reports": "npm-run-all reports:tests reports:coverage",
     "reports:tests": "BABEL_DISABLE_CACHE=1 mocha --reporter xunit | grep \"<\" >> reports/test-results.xml",
-    "reports:coverage": "BABEL_DISABLE_CACHE=1 istanbul cover _mocha",
+    "reports:coverage": "BABEL_DISABLE_CACHE=1 isparta cover _mocha",
     <% } %>
     "validate": "npm-run-all lint test",
     "prepush": "npm run validate",
