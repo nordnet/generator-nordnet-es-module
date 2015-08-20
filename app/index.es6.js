@@ -50,7 +50,7 @@ export default class NordnetEsModule extends Base {
         name: 'site',
         message: 'your site:',
         store: true,
-        filter: val => normalizeUrl(val),
+        filter: val => val ? normalizeUrl(val) : val,
       }, {
         when: props => props.isCorporate,
         name: 'companyName',
